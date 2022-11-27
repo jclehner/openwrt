@@ -1,0 +1,83 @@
+Index: linux-5.15.79/arch/arm64/boot/dts/broadcom/bcmbca/bcm4908.dtsi
+===================================================================
+--- linux-5.15.79.orig/arch/arm64/boot/dts/broadcom/bcmbca/bcm4908.dtsi	2022-11-27 13:39:16.037505525 +0100
++++ linux-5.15.79/arch/arm64/boot/dts/broadcom/bcmbca/bcm4908.dtsi	2022-11-27 13:46:54.245722830 +0100
+@@ -269,6 +269,69 @@
+ 		};
+ 	};
+ 
++	pcie0: pcie@80040000 {
++		compatible = "brcm,bcm4908-pcie";
++		reg = <0x0 0x80040000 0x0 0xa000>;
++		power-domains = <&pmb BCM_PMB_PCIE0>;
++		resets = <&pcie_reset 0>;
++		reset-names = "perst";
++		device_type = "pci";
++		bus-range = <0x00 0xff>;
++
++		#address-cells = <3>;
++		#size-cells = <2>;
++		#interrupt-cells = <1>;
++
++		ranges = <0x03000000 0x0 0xc0000000  0x0 0xc0000000  0x0 0x10000000>;
++
++		interrupt-map-mask = <0 0 0 0>;
++		interrupt-map = <0 0 0 0 &gic GIC_SPI 59 IRQ_TYPE_LEVEL_HIGH>;
++
++		status = "disabled";
++	};
++
++	pcie1: pcie@80050000 {
++		compatible = "brcm,bcm4908-pcie";
++		reg = <0x0 0x80050000 0x0 0xa000>;
++		power-domains = <&pmb BCM_PMB_PCIE1>;
++		resets = <&pcie_reset 1>;
++		reset-names = "perst";
++		device_type = "pci";
++		bus-range = <0x00 0xff>;
++
++		#address-cells = <3>;
++		#size-cells = <2>;
++		#interrupt-cells = <1>;
++
++		ranges = <0x03000000 0x0 0xd0000000  0x0 0xd0000000  0x0 0x10000000>;
++
++		interrupt-map-mask = <0 0 0 0>;
++		interrupt-map = <0 0 0 0 &gic GIC_SPI 60 IRQ_TYPE_LEVEL_HIGH>;
++
++		status = "disabled";
++	};
++
++	pcie2: pcie@80060000 {
++		compatible = "brcm,bcm4908-pcie";
++		reg = <0x0 0x80060000 0x0 0xa000>;
++		power-domains = <&pmb BCM_PMB_PCIE2>;
++		resets = <&pcie_reset 2>;
++		reset-names = "perst";
++		device_type = "pci";
++		bus-range = <0x00 0xff>;
++
++		#address-cells = <3>;
++		#size-cells = <2>;
++		#interrupt-cells = <1>;
++
++		ranges = <0x03000000 0x0 0xe0000000  0x0 0xe0000000  0x0 0x10000000>;
++
++		interrupt-map-mask = <0 0 0 0>;
++		interrupt-map = <0 0 0 0 &gic GIC_SPI 61 IRQ_TYPE_LEVEL_HIGH>;
++
++		status = "disabled";
++	};
++
+ 	bus@ff800000 {
+ 		compatible = "simple-bus";
+ 		#address-cells = <1>;
+@@ -563,7 +626,7 @@
+ 			#size-cells = <1>;
+ 			ranges = <0x00 0x2600 0xe4>;
+ 
+-			reset-controller@2644 {
++			pcie_reset: reset-controller@2644 {
+ 				compatible = "brcm,bcm4908-misc-pcie-reset";
+ 				reg = <0x44 0x04>;
+ 				#reset-cells = <1>;
