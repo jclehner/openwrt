@@ -101,10 +101,11 @@ define Device/netgear_r8000p
   DEVICE_VENDOR := Netgear
   DEVICE_MODEL := R8000P
   DEVICE_DTS := broadcom/bcmbca/bcm4906-netgear-r8000p
-  IMAGES := bin
+  IMAGES := bin chk
   IMAGE/chk := append-ubi | bcm4908img | netgear-chk
   NETGEAR_BOARD_ID := U12H359T00_NETGEAR
   NETGEAR_REGION := 1
+  SOC := bcm4908
 endef
 TARGET_DEVICES += netgear_r8000p
 
